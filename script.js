@@ -80,12 +80,11 @@ const quizData = [
             "Insegura achando que nunca vou conseguir",
             "Determinada a ser melhor que elas"
         ]
-    },
-    {
+    },    {
         question: "Se pudesse começar sua jornada como nail designer hoje, o que você mais precisaria?",
         options: [
             "Um método passo a passo fácil de seguir",
-            "Uma mentora experiente para me guiar",
+            "Uma mentora experiente para me orientar",
             "Técnicas que realmente funcionam no mercado",
             "Confiança de que vou conseguir ter sucesso"
         ]
@@ -450,74 +449,6 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// WhatsApp button floating effect
-function createFloatingWhatsApp() {
-    const floatingBtn = document.createElement('a');
-    floatingBtn.href = 'https://api.whatsapp.com/send?phone=5511999999999&text=Oi,%20tenho%20interesse%20no%20curso%20de%20Nail%20Design!';
-    floatingBtn.target = '_blank';
-    floatingBtn.className = 'floating-whatsapp';
-    floatingBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
-    
-    // Add floating WhatsApp CSS
-    const floatingStyle = document.createElement('style');
-    floatingStyle.textContent = `
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        
-        .floating-whatsapp:hover {
-            transform: scale(1.1);
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
-            50% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.6); }
-            100% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
-        }
-    `;
-    document.head.appendChild(floatingStyle);
-    document.body.appendChild(floatingBtn);
-}
-
-// Initialize floating WhatsApp button
-document.addEventListener('DOMContentLoaded', createFloatingWhatsApp);
-
-// Lazy loading for images
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('img');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.src; // Trigger loading
-                img.classList.remove('lazy');
-                observer.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => {
-        imageObserver.observe(img);
-    });
-});
 
 // Add loading animation
 window.addEventListener('load', function() {
