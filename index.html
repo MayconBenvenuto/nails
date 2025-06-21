@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curso completo de Nail Design - Aprenda a faturar R$ 2.500 a R$ 4.000 por mês como designer de unhas profissional. Técnicas avançadas, certificado e suporte completo.">
+    <meta name="keywords" content="curso nail design, designer de unhas, manicure profissional, curso online unhas, técnicas nail art">
+    <meta name="author" content="Nail Designer Elite">
+    <meta property="og:title" content="Curso Nails Design - Torne-se uma Profissional de Sucesso">
+    <meta property="og:description" content="Transforme suas mãos em uma máquina de fazer dinheiro. Aprenda nail design do zero e conquiste sua independência financeira.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.naildesignerelite.com">
+    <meta property="og:image" content="https://www.naildesignerelite.com/certificado.jpg">
     <title>Curso Nails Design - Torne-se uma Profissional de Sucesso</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Quiz Modal -->
-    <div id="quiz-modal" class="quiz-modal">        <div class="quiz-container">
-            <div class="quiz-header">
-                <button class="quiz-close-btn" id="quiz-close-btn">
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+      <!-- Quiz Modal -->
+    <div id="quiz-modal" class="quiz-modal">
+        <div class="quiz-container">
+            <div class="quiz-header">                <button class="quiz-close-btn" id="quiz-close-btn" aria-label="Fechar quiz">
                     <i class="fas fa-times"></i>
                 </button>
                 <h2>🎯 Descubra seu Potencial como Nail Designer</h2>
@@ -21,7 +33,7 @@
                     <div class="progress-bar">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>
-                    <span class="progress-text">Questão <span id="current-question">1</span> de 4</span>
+                    <span class="progress-text">Questão <span id="current-question">1</span> de 5</span>
                 </div>
             </div>
             
@@ -34,10 +46,9 @@
                     <button id="next-btn" class="quiz-btn" style="display: none;">Próxima Questão</button>
                     <button id="finish-btn" class="quiz-btn quiz-btn-finish" style="display: none;">Ver Meu Resultado</button>
                 </div>
-            </div>
-        </div>
+            </div>        </div>
     </div>
-
+    
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -50,19 +61,39 @@
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#preco">Preço</a>
                 <a href="#contato" class="btn-cta">Contato</a>
-            </nav>
+            </nav>            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+        <nav class="mobile-nav" id="mobile-nav">
+            <a href="#sobre">Sobre o Curso</a>
+            <a href="#curso">Como Funciona</a>
+            <a href="#depoimentos">Depoimentos</a>
+            <a href="#preco">Preços</a>
+            <a href="#contato">Contato</a>        </nav>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
+    
+    <!-- Hero Section -->    <section class="hero" id="main-content">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Você está a <span class="highlight">5 passos</span> de se tornar uma <span class="highlight">Nail Design de Sucesso</span></h1>
-                    <p class="hero-subtitle">Aprenda tudo sobre Nails Design e se torne uma Profissional de Sucesso.</p>
-                    <p class="hero-description">Você pode produzir unhas super exclusivas e ser uma profissional diferenciada e inovadora!</p>
-                    <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="btn-primary" target="_blank">QUERO COMEÇAR AGORA</a>
+                    <h1>Você está a <span class="highlight">apenas 30 dias</span> de faturar <span class="highlight">R$ 2.500 a R$ 4.000 por mês</span> como Nail Designer</h1>
+                    <p class="hero-subtitle">🚀 Transforme suas mãos em uma máquina de fazer dinheiro e conquiste a liberdade financeira que você sempre sonhou!</p>
+                    <p class="hero-description">Mesmo que você seja <strong>INICIANTE TOTAL</strong>, nossa metodologia exclusiva vai te ensinar a criar unhas incríveis e construir uma clientela que paga R$ 50-80 por atendimento!</p>                    <div class="hero-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span><strong>R$ 50-80</strong> por cliente</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <span><strong>12-16 clientes</strong> por semana</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span><strong>R$ 2.500-4.000</strong> mensais</span>
+                        </div>
+                    </div>
+                    <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="btn-primary" target="_blank">💰 QUERO GANHAR R$ 2.500+ POR MÊS</a>
                     <div class="garantia">
                         <i class="fas fa-shield-alt"></i>
                         <span>Garantia de 7 dias ou seu dinheiro de volta</span>
@@ -105,10 +136,10 @@
         </div>
     </section>
 
-    <!-- O que você terá acesso -->
-    <section class="acesso" id="curso">
+    <!-- O que você terá acesso -->    <section class="acesso" id="curso">
         <div class="container">
-            <h2>SAIBA TUDO SOBRE O QUE VOCÊ TERÁ ACESSO:</h2>            <div class="acesso-grid">
+            <h2>SAIBA TUDO SOBRE O QUE VOCÊ TERÁ ACESSO:</h2>
+            <div class="acesso-grid">
                 <div class="acesso-item">
                     <i class="fas fa-headset"></i>
                     <span>Suporte completo durante todo o curso</span>
@@ -184,11 +215,59 @@
                     </div>
                     <h3>RISCO ZERO!</h3>
                     <h4>GARANTIA DE 7 DIAS</h4>
-                    <p>Você vai poder experimentar o curso por 7 Dias e, se o conteúdo descrito aqui no site não for o mesmo que você receber, nós devolveremos o seu dinheiro.</p>
-                </div>
+                    <p>Você vai poder experimentar o curso por 7 Dias e, se o conteúdo descrito aqui no site não for o mesmo que você receber, nós devolveremos o seu dinheiro.</p>                </div>
             </div>
         </div>
-    </section>    <!-- Depoimentos -->
+    </section>
+
+    <!-- Certificado -->
+    <section class="certificado">
+        <div class="container">
+            <div class="certificado-content">
+                <div class="certificado-text">
+                    <h2>🏆 RECEBA SEU CERTIFICADO PROFISSIONAL</h2>
+                    <p class="certificado-subtitle">Comprove sua especialização com um certificado reconhecido no mercado!</p>
+                    
+                    <div class="certificado-benefits">
+                        <div class="cert-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Certificado Digital</strong> de conclusão</span>
+                        </div>
+                        <div class="cert-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Reconhecimento profissional</strong> no mercado</span>
+                        </div>
+                        <div class="cert-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Comprove sua especialização</strong> para clientes</span>
+                        </div>
+                        <div class="cert-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Diferencial competitivo</strong> na sua área</span>
+                        </div>
+                    </div>
+
+                    <div class="certificado-cta">
+                        <p class="cta-highlight">✨ <strong>Agregue valor ao seu trabalho e conquiste mais clientes!</strong></p>
+                        <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="btn-certificado" target="_blank">
+                            🏆 QUERO MEU CERTIFICADO PROFISSIONAL
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="certificado-image">
+                    <div class="certificado-frame">
+                        <img src="certificado.jpg" alt="Certificado Profissional Nail Designer" loading="lazy">
+                        <div class="certificado-badge">
+                            <i class="fas fa-award"></i>
+                            <span>CERTIFICADO<br>OFICIAL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>        </div>
+    </section>
+    
+    <!-- Depoimentos -->
     <section class="depoimentos" id="depoimentos">
         <div class="container">
             <h2>🌟 TRANSFORMAÇÕES REAIS DE NOSSAS ALUNAS</h2>
@@ -213,7 +292,7 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p class="depoimento-text">"Saí do ZERO e hoje faturando R$ 8.000/mês! O curso mudou minha vida completamente."</p>
+                        <p class="depoimento-text">"Saí do ZERO e hoje faturando R$ 3.200/mês! O curso mudou minha vida completamente."</p>
                         <div class="cliente-info">
                             <strong>Camila R.</strong>
                             <span>Ex-vendedora, hoje Nail Designer de sucesso</span>
@@ -239,13 +318,12 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p class="depoimento-text">"Em 3 meses já tinha meu próprio estúdio! As técnicas são incríveis e funcionam de verdade."</p>
-                        <div class="cliente-info">
+                        <p class="depoimento-text">"Em 3 meses já tinha meu próprio estúdio! As técnicas são incríveis e funcionam de verdade."</p>                        <div class="cliente-info">
                             <strong>Priscila M.</strong>
                             <span>Dona de casa → Empresária de sucesso</span>
                         </div>
                         <div class="resultado-destaque">
-                            <span class="resultado-numero">R$ 15.000</span>
+                            <span class="resultado-numero">R$ 4.200</span>
                             <span class="resultado-texto">faturamento mensal</span>
                         </div>
                     </div>
@@ -282,10 +360,7 @@
                 <p class="cta-text">✨ <strong>Você também pode ter esses resultados!</strong></p>
                 <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="btn-depoimentos" target="_blank">
                     🚀 QUERO MEU RESULTADO TAMBÉM!
-                </a>
-            </div>
-        </div>
-    </section>
+                </a>            </div>
         </div>
     </section>
 
@@ -311,11 +386,11 @@
     <section class="preco" id="preco">
         <div class="container">
             <h2>ESSE É O VALOR QUE SEPARA VOCÊ DE UMA NAIL DESIGN DE SUCESSO!</h2>
-            <div class="preco-card">
-                <div class="preco-header">
+            <div class="preco-card">                <div class="preco-header">
                     <h3>ACESSO VITALÍCIO</h3>
                     <p>POR APENAS</p>
-                </div>                <div class="preco-valor">
+                </div>
+                <div class="preco-valor">
                     <div class="preco-parcelado">
                         <span class="parcelas">10x de</span>
                         <div class="valor-principal">
@@ -391,11 +466,11 @@
                         <p>Você receberá acesso a 40 vídeo-aulas, material de apoio, suporte via WhatsApp, certificado e muito mais.</p>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="faq-item">                    <div class="faq-question">
                         <h3>E SE EU TIVER DÚVIDAS NO DECORRER DO CURSO?</h3>
                         <i class="fas fa-chevron-down"></i>
-                    </div>                    <div class="faq-answer">
+                    </div>
+                    <div class="faq-answer">
                         <p>Você terá acesso a uma área de membros exclusiva com suporte por email e fórum da comunidade.</p>
                     </div>
                 </div>
@@ -407,10 +482,11 @@
                     <div class="faq-answer">
                         <p>As aulas ficam disponíveis 24h por dia na nossa plataforma online. Você pode assistir quando e onde quiser.</p>
                     </div>
-                </div>
-            </div>
+                </div>            </div>
         </div>
-    </section>    <!-- Contato -->
+    </section>
+    
+    <!-- Contato -->
     <section class="contato" id="contato">
         <div class="container">
             <h2>FICOU ALGUMA DÚVIDA SOBRE O NOSSO CURSO?</h2>

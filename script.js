@@ -1,4 +1,140 @@
-// Quiz Data - 4 questões focadas em mulheres que querem aprender nail design
+// =========================
+// MOBILE NAVIGATION
+// =========================
+
+// Mobile Menu Toggle
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (!mobileMenuBtn || !mobileNav) return;
+    
+    const mobileNavLinks = mobileNav.querySelectorAll('a');
+    
+    // Toggle mobile menu
+    mobileMenuBtn.addEventListener('click', function() {
+        const isActive = mobileNav.classList.contains('active');
+        
+        mobileNav.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        
+        if (!isActive) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden';
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = 'auto';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Close menu when clicking on links
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            mobileNav.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
+// Enhanced Header Scroll Effect
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', function() {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        // Hide header when scrolling down, show when scrolling up
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollY = currentScrollY;
+    });
+}
+
+// Enhanced Touch Interactions
+function initTouchInteractions() {
+    // Add ripple effect to buttons
+    const buttons = document.querySelectorAll('.btn-primary, .btn-certificado, .btn-depoimentos');
+    
+    buttons.forEach(button => {
+        button.addEventListener('touchstart', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.touches[0].clientX - rect.left - size / 2;
+            const y = e.touches[0].clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+}
+
+// Smooth Scroll Enhancement
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// =========================
+// QUIZ FUNCTIONALITY
+// =========================
+
+// Quiz Data - 5 perguntas específicas fornecidas pelo usuário
 const quizData = [
     {
         question: "Você gostaria de trabalhar de casa e ter sua própria renda?",
@@ -28,6 +164,15 @@ const quizData = [
         ]
     },
     {
+        question: "Você quer aprender do zero ou se aperfeiçoar?",
+        options: [
+            "Quero aprender do zero, nunca fiz unhas",
+            "Já sei o básico mas quero me aperfeiçoar",
+            "Tenho experiência mas quero técnicas profissionais",
+            "Quero me especializar em técnicas avançadas"
+        ]
+    },
+    {
         question: "Busca uma renda extra ou sua profissão principal?",
         options: [
             "Quero que seja minha profissão principal",
@@ -43,6 +188,20 @@ let userAnswers = [];
 
 // Quiz functionality
 function initQuiz() {
+    // Show quiz modal immediately when page loads
+    const quizModal = document.getElementById('quiz-modal');
+    quizModal.style.display = 'flex';
+    quizModal.style.opacity = '1';
+    quizModal.style.visibility = 'visible';
+    
+    // Prevent body scroll when quiz is open
+    document.body.style.overflow = 'hidden';
+    
+    // Reset quiz state
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    
+    // Show first question
     showQuestion(currentQuestionIndex);
     updateProgress();
 }
@@ -50,17 +209,17 @@ function initQuiz() {
 function showQuestion(index) {
     const questionContainer = document.getElementById('question-container');
     const question = quizData[index];
+    const letters = ['A', 'B', 'C', 'D'];
     
     questionContainer.innerHTML = `
-        <div class="question">
-            <h3>${question.question}</h3>
-            <div class="question-options">
-                ${question.options.map((option, optionIndex) => `
-                    <button class="option-btn" onclick="selectOption(${optionIndex})">
-                        <span class="option-text">${option}</span>
-                    </button>
-                `).join('')}
-            </div>
+        <h3 class="question-title">${question.question}</h3>
+        <div class="quiz-options">
+            ${question.options.map((option, optionIndex) => `
+                <div class="quiz-option" data-index="${optionIndex}" onclick="selectOption(${optionIndex})">
+                    <span class="quiz-option-letter">${letters[optionIndex]}</span>
+                    <span class="quiz-option-text">${option}</span>
+                </div>
+            `).join('')}
         </div>
     `;
     
@@ -74,12 +233,12 @@ function showQuestion(index) {
 
 function selectOption(optionIndex) {
     // Remove selection from all options
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.classList.remove('selected');
+    document.querySelectorAll('.quiz-option').forEach(option => {
+        option.classList.remove('selected');
     });
     
     // Add selection to clicked option
-    document.querySelectorAll('.option-btn')[optionIndex].classList.add('selected');
+    document.querySelectorAll('.quiz-option')[optionIndex].classList.add('selected');
     
     // Store answer
     userAnswers[currentQuestionIndex] = optionIndex;
@@ -87,8 +246,10 @@ function selectOption(optionIndex) {
     // Show appropriate button
     if (currentQuestionIndex === quizData.length - 1) {
         document.getElementById('finish-btn').style.display = 'inline-block';
+        document.getElementById('next-btn').style.display = 'none';
     } else {
         document.getElementById('next-btn').style.display = 'inline-block';
+        document.getElementById('finish-btn').style.display = 'none';
     }
 }
 
@@ -140,11 +301,10 @@ function showResult() {
     
     // Hide quiz buttons
     document.getElementById('next-btn').style.display = 'none';
-    document.getElementById('finish-btn').style.display = 'none';
-    
+    document.getElementById('finish-btn').style.display = 'none';    
     // Update progress to 100%
     document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('current-question').textContent = '4';
+    document.getElementById('current-question').textContent = '5';
     
     // Não remover automaticamente - só com clique no X
 }
@@ -153,6 +313,9 @@ function closeQuizAndScroll() {
     const quizModal = document.getElementById('quiz-modal');
     quizModal.style.opacity = '0';
     quizModal.style.transform = 'scale(0.9)';
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
     
     setTimeout(() => {
         quizModal.style.display = 'none';
@@ -172,45 +335,16 @@ function closeQuiz() {
     quizModal.style.opacity = '0';
     quizModal.style.transform = 'scale(0.9)';
     
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+    
     setTimeout(() => {
         quizModal.style.display = 'none';
     }, 500);
 }
 
-// Event listeners for quiz
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize quiz
-    initQuiz();
-    
-    // Add event listeners
-    document.getElementById('next-btn').addEventListener('click', nextQuestion);
-    document.getElementById('finish-btn').addEventListener('click', finishQuiz);
-    document.getElementById('quiz-close-btn').addEventListener('click', closeQuiz);
-    
-    // Remove auto-close functionality - only close manually
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeQuiz();
-        }
-    });
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
 // FAQ Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
+function setupFAQ() {
     const faqItems = document.querySelectorAll('.faq-item');
     
     faqItems.forEach(item => {
@@ -228,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
             item.classList.toggle('active');
         });
     });
-});
+}
 
 // Header scroll effect
 window.addEventListener('scroll', function() {
@@ -292,19 +426,41 @@ function animateCounter() {
     updateCounter();
 }
 
-// Trigger counter animation when price section is visible
-const priceSection = document.querySelector('.preco');
-if (priceSection) {
-    const priceObserver = new IntersectionObserver(function(entries) {
+// Enhanced Price Animation Function
+function setupAnimatedPrice() {
+    const priceSection = document.querySelector('.preco');
+    if (!priceSection) return;
+    
+    const priceObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateCounter();
+                animatePrice();
                 priceObserver.disconnect();
             }
         });
     }, { threshold: 0.5 });
     
     priceObserver.observe(priceSection);
+}
+
+function animatePrice() {
+    const priceElement = document.querySelector('.valor');
+    if (!priceElement) return;
+    
+    let currentValue = 0;
+    const targetValue = 17;
+    const increment = 1;
+    const delay = 100;
+    
+    const animateStep = () => {
+        if (currentValue <= targetValue) {
+            priceElement.textContent = currentValue;
+            currentValue += increment;
+            setTimeout(animateStep, delay);
+        }
+    };
+    
+    animateStep();
 }
 
 // Mobile menu toggle (if needed)
@@ -481,10 +637,91 @@ function createFloatingInstagram() {
 // Initialize floating Instagram button
 document.addEventListener('DOMContentLoaded', createFloatingInstagram);
 
-// Add loading animation
+// =========================
+// INITIALIZATION
+// =========================
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all mobile enhancements
+    initMobileMenu();
+    initHeaderScroll();
+    initTouchInteractions();
+    initSmoothScroll();
+    
+    // Initialize existing functionality
+    initQuiz();
+    setupAnimatedPrice();
+    setupFAQ();
+    createFloatingInstagram();
+    handleImageErrors();
+    
+    // Quiz event listeners
+    document.getElementById('next-btn').addEventListener('click', nextQuestion);
+    document.getElementById('finish-btn').addEventListener('click', finishQuiz);
+    document.getElementById('quiz-close-btn').addEventListener('click', closeQuiz);
+    
+    // Escape key to close quiz
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeQuiz();
+        }
+    });
+    
+    // Add intersection observer for animations
+    initScrollAnimations();
+    
+    // Add loading animation
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);
+});
+
+// Scroll Animations
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.card, .acesso-item, .module, .garantia-item, .depoimento-visual, .cert-benefit');
+    animateElements.forEach(el => observer.observe(el));
+}
+
+// Enhanced Window Load Event
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
+    
+    // Preload critical images
+    const criticalImages = document.querySelectorAll('img[loading="lazy"]');
+    criticalImages.forEach(img => {
+        if (img.getBoundingClientRect().top < window.innerHeight * 2) {
+            img.loading = 'eager';
+        }
+    });
 });
+
+// Performance optimizations
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
+
+// Add to head - Enhanced Loading Styles
 
 // Add to head
 const loadingStyle = document.createElement('style');
@@ -499,3 +736,39 @@ loadingStyle.textContent = `
     }
 `;
 document.head.appendChild(loadingStyle);
+
+// Image Loading Error Handling
+function handleImageErrors() {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            // Hide broken image if it's a local file that doesn't exist
+            if (this.src.includes('dpm') || this.src.includes('certificado.jpg')) {
+                this.style.display = 'none';
+                console.warn(`Imagem não encontrada: ${this.src}`);
+                
+                // Add fallback styling to parent container
+                const parent = this.parentElement;
+                if (parent) {
+                    parent.style.background = 'linear-gradient(135deg, #f0f0f0, #e0e0e0)';
+                    parent.style.display = 'flex';
+                    parent.style.alignItems = 'center';
+                    parent.style.justifyContent = 'center';
+                    parent.innerHTML = '<i class="fas fa-image" style="font-size: 3rem; color: #ccc;"></i>';
+                }
+            }
+        });
+        
+        // Add loading state
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
+    });
+}
+
+// Initialize image error handling
+document.addEventListener('DOMContentLoaded', handleImageErrors);
