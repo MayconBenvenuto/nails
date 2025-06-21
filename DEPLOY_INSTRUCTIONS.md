@@ -1,9 +1,13 @@
 # Instruções para Configurar GitHub Pages
 
-## Passos para habilitar o GitHub Pages:
+## ⚠️ SOLUCIONANDO ERRO 403
+
+Se você recebeu erro 403 ao acessar o site, siga estes passos:
+
+### Método 1: Configurar GitHub Pages Manualmente
 
 1. **Acesse seu repositório no GitHub:**
-   - Vá para: https://github.com/MayconBenvenuto/nails
+   - Vá para: <https://github.com/MayconBenvenuto/nails>
 
 2. **Acesse as configurações:**
    - Clique na aba "Settings" (Configurações)
@@ -13,43 +17,51 @@
    - Clique em "Pages"
 
 4. **Configure a fonte:**
-   - Em "Source" (Fonte), selecione "GitHub Actions"
-   - Isso permitirá que o GitHub Actions (já configurado) faça o deploy
+   - Em "Source" (Fonte), selecione "Deploy from a branch"
+   - Em "Branch", selecione "gh-pages" (será criada automaticamente pelo GitHub Actions)
+   - Deixe "/ (root)" selecionado
+   - Clique em "Save"
 
-5. **Configurar domínio personalizado (opcional):**
-   - Se você tem um domínio personalizado, digite "naildesignerelite.com.br" em "Custom domain"
-   - O arquivo CNAME já está configurado no repositório
+### Método 2: Se o erro persistir
 
-6. **Aguarde o deploy:**
-   - O primeiro deploy pode levar alguns minutos
-   - Você pode acompanhar o progresso na aba "Actions" do repositório
+1. **Torne o repositório público:**
+   - Vá para Settings > General
+   - Role até o final da página
+   - Clique em "Change repository visibility"
+   - Selecione "Make public"
 
-## URLs do seu site:
+2. **Force um novo deploy:**
+   - Faça um pequeno commit para forçar o GitHub Actions a executar novamente
 
-- **GitHub Pages padrão:** https://mayconbenvenuto.github.io/nails/
-- **Domínio personalizado:** https://naildesignerelite.com.br (quando configurado)
+## URLs do seu site
 
-## Como verificar se está funcionando:
+- **GitHub Pages padrão:** <https://mayconbenvenuto.github.io/nails/>
+- **Domínio personalizado:** <https://naildesignerelite.com.br> (quando configurado)
+
+## Como verificar se está funcionando
 
 1. Vá para a aba "Actions" no GitHub
-2. Verifique se o workflow "Deploy to GitHub Pages" está executando ou foi concluído
-3. Se houver erro, clique no workflow para ver os detalhes
+2. Verifique se o workflow "Deploy to GitHub Pages" foi executado com sucesso
+3. Vá para Settings > Pages e verifique se mostra uma URL verde
+4. Aguarde alguns minutos para propagação
 
-## Deploy automático:
+## Deploy automático
 
 Toda vez que você fizer um push para a branch `main`, o site será automaticamente atualizado no GitHub Pages através do GitHub Actions.
 
-## Solução de problemas:
+## Solução de problemas comuns
 
-- Se o site não carregar, verifique se o GitHub Pages está habilitado
-- Se as imagens não aparecem, pode ser um problema de CORS - as imagens de URLs externas devem carregar normalmente
-- Se o domínio personalizado não funcionar, verifique se o DNS está configurado corretamente
+- **Erro 403:** Repositório pode estar privado ou GitHub Pages não habilitado
+- **Erro 404:** Branch gh-pages não existe ou não foi configurada
+- **Site não atualiza:** Aguarde até 10 minutos para propagação
+- **Imagens não carregam:** URLs externas podem ter CORS, mas devem funcionar
+- **Domínio personalizado não funciona:** Verifique configuração DNS
 
-## Configuração de DNS (para domínio personalizado):
+## Configuração de DNS (para domínio personalizado)
 
 Para que o domínio personalizado funcione, configure os seguintes registros DNS:
 
-```
+```dns
 Tipo: CNAME
 Nome: www
 Valor: mayconbenvenuto.github.io
@@ -62,3 +74,8 @@ Valores:
 185.199.110.153
 185.199.111.153
 ```
+
+## Status do Deploy
+
+Você pode verificar o status do deploy em tempo real em:
+<https://github.com/MayconBenvenuto/nails/actions>
