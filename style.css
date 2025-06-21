@@ -129,22 +129,25 @@ body {
 }
 
 .mobile-nav {
-    display: none;
     position: fixed;
     top: 70px;
     left: 0;
     width: 100%;
     background: rgba(101, 15, 89, 0.98);
     backdrop-filter: blur(15px);
-    padding: 2rem 0;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
+    padding: 1rem 0;
+    transform: translateY(-200%);
+    transition: transform 0.4s ease;
     z-index: 999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
 }
 
 .mobile-nav.active {
     transform: translateY(0);
-    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 .mobile-nav a {
@@ -318,10 +321,52 @@ body {
     font-size: 0.9rem;
 }
 
-.hero-image img {
+.hero-image {
     width: 100%;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease;
+}
+
+.hero-image-fallback {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    background: linear-gradient(135deg, #8B1C6B, #650F59);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-image-fallback i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-image-fallback p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Para Quem Section */
@@ -1240,6 +1285,34 @@ body {
         to { opacity: 1; transform: scale(1); }
     }
     
+    .nav {
+        display: none;
+    }
+    
+    /* Hero section mobile */
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 0 15px;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-image {
+        grid-row: 1;
+        margin-bottom: 20px;
+    }
+    
+    .hero-benefits {
+        justify-content: center;
+    }
+    
+    .hero {
+        padding: 90px 0 50px;
+    }
+    
     /* Enhanced Mobile Interactions */
     .cards-grid .card,
     .acesso-item,
@@ -1339,43 +1412,164 @@ body {
     }
 }
 
-/* Enhanced Mobile Portrait */
-@media (max-width: 480px) and (orientation: portrait) {
-    .hero h1 {
-        font-size: 1.7rem;
+@media (max-width: 768px) {
+    /* Cards grid para mobile */
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .benefit-item {
-        padding: 0.8rem 1rem;
-        font-size: 0.9rem;
+    /* Acesso grid para mobile */
+    .acesso-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
-    .btn-primary {
-        padding: 1rem;
-        font-size: 0.95rem;
+    /* Módulos para mobile */
+    .modules-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .container {
-        padding: 0 15px;
-    }
-}
-
-/* Mobile Landscape Optimizations */
-@media (max-width: 768px) and (orientation: landscape) {
-    .hero {
-        min-height: 70vh;
-        padding: 80px 0 40px;
+    /* Garantias para mobile */
+    .garantias-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
     
-    .hero-benefits {
-        flex-direction: row;
-        flex-wrap: wrap;
+    /* Certificado layout para mobile */
+    .certificado-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .certificado-text {
+        order: 2;
+    }
+    
+    .certificado-image {
+        order: 1;
+        margin-bottom: 1.5rem;
+    }
+    
+    .certificado-benefits {
         justify-content: center;
     }
     
-    .benefit-item {
-        max-width: 200px;
+    /* Depoimentos para mobile */
+    .depoimentos-visual-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .depoimento-visual.destaque {
+        grid-column: auto;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-grid .card,
+    .module,
+    .acesso-item {
+        padding: 1.2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    .cert-benefit,
+    .benefit-item,
+    .depoimento-content {
         font-size: 0.9rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .preco-card {
+        padding: 1.5rem;
+        margin: 0 10px;
+    }
+}
+
+/* Estilos responsivos para seção de preço */
+@media (max-width: 768px) {
+    .preco-header {
+        padding: 1rem;
+    }
+    
+    .preco-valor {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .valor-principal {
+        justify-content: center;
+    }
+    
+    .btn-comprar {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    /* FAQ responsivo */
+    .faq-question h3 {
+        font-size: 1rem;
+        padding-right: 30px;
+    }
+    
+    .faq-answer p {
+        font-size: 0.9rem;
+    }
+    
+    /* Footer responsivo */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+/* Otimizações para telas muito pequenas */
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle, .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary, .btn-comprar, .btn-certificado, .btn-depoimentos {
+        font-size: 0.85rem;
+        padding: 0.8rem 1rem;
+        width: 100%;
+    }
+    
+    .benefit-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .certificado-benefits, .hero-benefits {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .estrelas {
+        transform: scale(0.8);
     }
 }
 
@@ -1468,6 +1662,23 @@ body.loaded {
     to {
         transform: scale(4);
         opacity: 0;
+    }
+}
+
+/* Estilos para feedback tátil em touchscreens */
+.touch-active {
+    background-color: rgba(101, 15, 89, 0.05);
+    transform: scale(0.98);
+}
+
+/* Otimizações para telas de alta densidade */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    img {
+        image-rendering: -webkit-optimize-contrast;
     }
 }
 
@@ -1980,4 +2191,47 @@ button:focus, a:focus, input:focus {
         font-size: 0.85rem;
         flex: 1;
     }
+}
+
+/* Estilos específicos para dispositivos móveis */
+.mobile-device {
+    scroll-padding-top: 70px; /* Evitar que o cabeçalho fixo oculte o conteúdo */
+}
+
+.mobile-device .header {
+    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+}
+
+.mobile-device .btn-primary,
+.mobile-device .btn-certificado,
+.mobile-device .btn-depoimentos,
+.mobile-device .btn-comprar {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.mobile-device section {
+    padding: 40px 0;
+}
+
+.mobile-device h2 {
+    margin-bottom: 1.5rem;
+}
+
+.touch-pulse {
+    animation: touchPulse 0.3s ease-out;
+}
+
+@keyframes touchPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Melhorias de acessibilidade para toque */
+.mobile-device .quiz-option,
+.mobile-device .faq-question,
+.mobile-device .btn-cta,
+.mobile-device .mobile-nav a {
+    min-height: 44px; /* Tamanho mínimo recomendado para áreas de toque */
 }

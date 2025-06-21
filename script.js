@@ -6,6 +6,7 @@
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
+    const header = document.querySelector('.header');
     
     if (!mobileMenuBtn || !mobileNav) return;
     
@@ -41,8 +42,7 @@ function initMobileMenu() {
             document.body.style.overflow = 'auto';
         });
     });
-    
-    // Close menu when clicking outside
+      // Close menu when clicking outside
     document.addEventListener('click', function(e) {
         if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
             mobileNav.classList.remove('active');
@@ -50,8 +50,30 @@ function initMobileMenu() {
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
             document.body.style.overflow = 'auto';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
         }
     });
+    
+    // Add touch events for better mobile experience
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndY = e.changedTouches[0].screenY;
+        // If swipe down on the menu, close it
+        if (mobileNav.classList.contains('active') && touchEndY > touchStartY + 50) {
+            mobileNav.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = 'auto';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+    }, { passive: true });
 }
 
 // Enhanced Header Scroll Effect
@@ -82,7 +104,7 @@ function initHeaderScroll() {
 // Enhanced Touch Interactions
 function initTouchInteractions() {
     // Add ripple effect to buttons
-    const buttons = document.querySelectorAll('.btn-primary, .btn-certificado, .btn-depoimentos');
+    const buttons = document.querySelectorAll('.btn-primary, .btn-certificado, .btn-depoimentos, .btn-comprar, .quiz-btn');
     
     buttons.forEach(button => {
         button.addEventListener('touchstart', function(e) {
@@ -102,7 +124,25 @@ function initTouchInteractions() {
             setTimeout(() => {
                 ripple.remove();
             }, 600);
+        }, { passive: true });
+        
+        // Impedir o delay de toque em dispositivos móveis
+        button.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            this.click();
         });
+    });
+    
+    // Melhorar a experiência de toque no FAQ
+    const faqItems = document.querySelectorAll('.faq-question');
+    faqItems.forEach(item => {
+        item.addEventListener('touchstart', function() {
+            this.classList.add('touch-active');
+        }, { passive: true });
+        
+        item.addEventListener('touchend', function() {
+            this.classList.remove('touch-active');
+        }, { passive: true });
     });
 }
 
@@ -118,8 +158,24 @@ function initSmoothScroll() {
             const targetElement = document.getElementById(targetId);
             
             if (targetElement) {
+                // Verificar se está em dispositivo móvel e se o menu está aberto
+                const mobileNav = document.getElementById('mobile-nav');
+                if (mobileNav && mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                    if (mobileMenuBtn) {
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                    document.body.style.overflow = 'auto';
+                }
+                
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
+                // Adicionar offset extra para melhor visualização em dispositivos móveis
+                const extraOffset = window.innerWidth <= 768 ? 15 : 0;
+                const targetPosition = targetElement.offsetTop - headerHeight - extraOffset;
                 
                 window.scrollTo({
                     top: targetPosition,
@@ -646,6 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderScroll();
     initTouchInteractions();
     initSmoothScroll();
+    optimizeForMobile();
     
     // Initialize existing functionality
     initQuiz();
@@ -772,3 +829,142 @@ function handleImageErrors() {
 
 // Initialize image error handling
 document.addEventListener('DOMContentLoaded', handleImageErrors);
+
+// Otimizações para dispositivos móveis
+function optimizeForMobile() {
+    // Detectar se é dispositivo móvel
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Adicionar classe ao body
+        document.body.classList.add('mobile-device');
+        
+        // Otimizar imagens para mobile
+        const images = document.querySelectorAll('img[src*="unsplash"]');
+        images.forEach(img => {
+            // Substituir tamanhos grandes por menores em dispositivos móveis
+            let currentSrc = img.src;
+            if (currentSrc.includes('&w=1000')) {
+                img.src = currentSrc.replace('&w=1000', '&w=500');
+            }
+        });
+        
+        // Acelerar o carregamento de fontes
+        const fontLink = document.createElement('link');
+        fontLink.rel = 'preload';
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap';
+        fontLink.as = 'style';
+        document.head.appendChild(fontLink);
+        
+        // Adicionar eventos de toque para interatividade
+        document.querySelectorAll('.card, .module, .benefit-item').forEach(item => {
+            item.addEventListener('touchstart', function() {
+                this.classList.add('touch-active');
+            }, { passive: true });
+            
+            item.addEventListener('touchend', function() {
+                this.classList.remove('touch-active');
+                // Pequeno efeito de pulsação ao soltar
+                this.classList.add('touch-pulse');
+                setTimeout(() => {
+                    this.classList.remove('touch-pulse');
+                }, 300);
+            }, { passive: true });
+        });
+    }
+}
+
+// Chamar função de otimização mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // ... outros códigos de inicialização existentes ...
+    
+    optimizeForMobile();
+});
+
+// Manipular mudanças de orientação de tela
+function handleOrientationChange() {
+    const orientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+    document.body.classList.remove('portrait', 'landscape');
+    document.body.classList.add(orientation);
+    
+    // Ajustar elementos baseados na orientação
+    if (orientation === 'landscape' && window.innerWidth < 900) {
+        // Ajustar elementos especificamente para telas pequenas em landscape
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.minHeight = '450px';
+        }
+    } else if (orientation === 'portrait') {
+        // Restaurar valores para portrait
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.minHeight = '';
+        }
+    }
+}
+
+// Monitor de orientação
+window.addEventListener('resize', function() {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        handleOrientationChange();
+    }
+});
+
+// Chamar na inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    handleOrientationChange();
+});
+
+// Adicionar tratamento específico para a imagem do hero
+function fixHeroImage() {
+    // Selecionar a imagem do hero
+    const heroImg = document.querySelector('.hero-image img');
+    if (!heroImg) return;
+    
+    // Lista de URLs de fallback para uma imagem de nail design
+    const fallbackImages = [
+        "hero-image.jpg",
+        "https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=1000",
+        "https://images.pexels.com/photos/7791102/pexels-photo-7791102.jpeg?auto=compress&cs=tinysrgb&w=1000",
+        "https://images.pexels.com/photos/704815/pexels-photo-704815.jpeg?auto=compress&cs=tinysrgb&w=1000"
+    ];
+    
+    let fallbackIndex = 0;
+    
+    // Verificar se a imagem já carregou
+    if (heroImg.complete) {
+        // Se a imagem já carregou mas teve erro, usar fallback
+        if (heroImg.naturalHeight === 0) {
+            loadNextFallback();
+        }
+    }
+    
+    // Adicionar handler de erro para a imagem
+    heroImg.addEventListener('error', loadNextFallback);
+    
+    // Tenta carregar o próximo fallback
+    function loadNextFallback() {
+        fallbackIndex++;
+        
+        if (fallbackIndex < fallbackImages.length) {
+            heroImg.src = fallbackImages[fallbackIndex];
+        } else {
+            // Todos os fallbacks falharam, criar uma imagem fallback inline
+            const heroImageDiv = document.querySelector('.hero-image');
+            if (heroImageDiv) {
+                heroImageDiv.innerHTML = `
+                    <div class="hero-image-fallback">
+                        <i class="fas fa-spa"></i>
+                        <p>Nail Design Profissional</p>
+                    </div>
+                `;
+            }
+        }
+    }
+}
+
+// Chamar a função quando o documento estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    fixHeroImage();
+});
