@@ -7,6 +7,7 @@ Landing page profissional para curso de nail design com funcionalidades interati
 ## 🌐 Site Online
 
 Acesse o site: [https://naildesignerelite.com.br](https://naildesignerelite.com.br)
+*Domínio configurado via HostGator - veja instruções DNS em `DNS_HOSTGATOR_CONFIG.md`*
 
 ## Estrutura do Projeto
 
@@ -55,6 +56,16 @@ O site é automaticamente deployado no GitHub Pages sempre que há um push para 
 1. **Deploy Automático**: GitHub Actions configura e deploya automaticamente
 2. **Domínio Personalizado**: Configurado via arquivo CNAME
 3. **HTTPS**: Habilitado automaticamente pelo GitHub Pages
+
+### HostGator DNS Configuration
+
+**📁 Arquivo:** `DNS_HOSTGATOR_CONFIG.md` - Instruções completas para configurar o DNS
+
+**Configuração rápida:**
+1. Acesse cPanel da HostGator
+2. Zone Editor > Adicionar registros A para GitHub Pages
+3. Configurar CNAME para www
+4. Aguardar propagação (2-24 horas)
 
 ### Como fazer deploy manualmente:
 
