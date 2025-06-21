@@ -109,3 +109,19 @@ npx serve .
 ## Contato
 
 Para suporte: <suporte@naildesign.com>
+
+## 🌐 Configuração de Domínio Personalizado (HostGator)
+
+O domínio `naildesignerelite.com.br` está registrado na HostGator. Para conectá-lo ao GitHub Pages:
+
+### Configuração DNS necessária:
+1. **Acesse o cPanel da HostGator**
+2. **Vá para "Zone Editor" ou "Editor de Zona DNS"**
+3. **Configure os registros DNS conforme arquivo `DNS_HOSTGATOR_CONFIG.md`**
+
+### Registros importantes:
+- **Tipo A:** Apontar para IPs do GitHub Pages
+- **Tipo CNAME:** www apontar para mayconbenvenuto.github.io
+- **Tempo de propagação:** 24-48 horas
+
+**Arquivo detalhado:** `DNS_HOSTGATOR_CONFIG.md`
