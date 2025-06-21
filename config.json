@@ -1,0 +1,88 @@
+{
+  "site": {
+    "name": "Nail Design Elite",
+    "version": "2.0.0",
+    "description": "Curso completo de Nail Design",
+    "url": "https://naildesignerelite.com.br"
+  },
+  "colors": {
+    "primary": "#650F59",
+    "secondary": "#FF6B6B", 
+    "accent": "#fff200",
+    "text": "#333",
+    "background": "#ffffff"
+  },
+  "checkout": {
+    "url": "https://go.hotmart.com/K100327110W?ap=a12c",
+    "affiliate": "a12c"
+  },
+  "pricing": {
+    "original": 297,
+    "discount": 147,
+    "installments": 12,
+    "installmentValue": 17
+  },
+  "quiz": {
+    "questions": [
+      {
+        "id": 1,
+        "question": "Você gostaria de trabalhar de casa e ter sua própria renda?",
+        "options": [
+          "Sim, quero muito ter independência financeira",
+          "Sim, mas tenho receio de não conseguir", 
+          "Talvez, dependendo da oportunidade",
+          "Não, prefiro trabalhar fora de casa"
+        ]
+      },
+      {
+        "id": 2,
+        "question": "Você já trabalha na área da beleza?",
+        "options": [
+          "Não, seria minha primeira experiência",
+          "Sim, mas não com nail design",
+          "Sim, já faço unhas mas quero me aperfeiçoar",
+          "Trabalho em outra área completamente diferente"
+        ]
+      },
+      {
+        "id": 3,
+        "question": "Seus familiares ou amigas já pediram para você fazer as unhas delas?",
+        "options": [
+          "Sim, sempre me pedem e elogiam meu trabalho",
+          "Sim, algumas vezes já me pediram",
+          "Raramente, mas já aconteceu",
+          "Não, nunca me pediram"
+        ]
+      },
+      {
+        "id": 4,
+        "question": "Você quer aprender do zero ou se aperfeiçoar?",
+        "options": [
+          "Quero aprender do zero, nunca fiz unhas",
+          "Já sei o básico mas quero me aperfeiçoar",
+          "Tenho experiência mas quero técnicas profissionais",
+          "Quero me especializar em técnicas avançadas"
+        ]
+      },
+      {
+        "id": 5,
+        "question": "Busca uma renda extra ou sua profissão principal?",
+        "options": [
+          "Quero que seja minha profissão principal",
+          "Busco uma renda extra para complementar",
+          "Quero começar como extra e depois virar principal",
+          "Ainda estou decidindo entre as duas opções"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "email": "suporte@naildesign.com",
+    "phone": "+55 11 99999-9999"
+  },
+  "analytics": {
+    "gtag": "G-XXXXXXXXXX",
+    "facebook": "123456789",
+    "enabled": false
+  }
+}

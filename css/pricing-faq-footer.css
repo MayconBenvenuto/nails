@@ -1,0 +1,307 @@
+/* ===================================
+   PRICING, FAQ & FOOTER
+   =================================== */
+
+/* Pricing Section */
+.preco {
+    padding: 80px 0;
+    background: white;
+    text-align: center;
+}
+
+.preco h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.preco-card {
+    background: white;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 3px solid var(--primary-color);
+}
+
+.preco-header h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.preco-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.preco-valor {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.preco-parcelado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.parcelas {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.valor-principal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.moeda {
+    font-size: 2rem;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.valor {
+    font-size: 4rem;
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.centavos {
+    font-size: 2rem;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.preco-total {
+    margin-top: 1rem;
+}
+
+.total-text {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.beneficios {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.beneficio {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.beneficio i {
+    color: #2ed573;
+    font-size: 1.2rem;
+}
+
+.beneficio span {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.seguranca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.seguranca i {
+    color: #2ed573;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 80px 0;
+    background: white;
+}
+
+.faq h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.faq-items {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    background: transparent;
+    user-select: none;
+}
+
+.faq-question:hover {
+    color: #ff6b9d;
+}
+
+.faq-question h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: inherit;
+    margin: 0;
+    padding-right: var(--spacing-md);
+}
+
+.faq-question i {
+    font-size: var(--font-size-lg);
+    color: var(--primary-color);
+    transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: transparent;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+}
+
+.faq-answer p {
+    padding-bottom: 1.5rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: var(--font-size-base);
+    margin: 0;
+}
+
+/* Contato Section */
+.contato {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #650F59, #8B1C6B);
+    color: white;
+    text-align: center;
+}
+
+.contato h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
+.contato h2::after {
+    background: var(--accent-color);
+}
+
+.contato p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-sm);
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    font-size: var(--font-size-sm);
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .preco-container {
+        padding: var(--spacing-lg);
+        margin: 0 var(--spacing-sm);
+    }
+    
+    .valor-desconto {
+        font-size: 2.5rem;
+    }
+    
+    .faq-question {
+        padding: var(--spacing-md);
+    }
+    
+    .faq-question h3 {
+        font-size: var(--font-size-base);
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: var(--spacing-md);
+    }
+    
+    .contato p {
+        font-size: var(--font-size-base);
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}

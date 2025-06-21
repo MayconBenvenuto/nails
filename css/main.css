@@ -1,0 +1,262 @@
+/* ===================================
+   MAIN STYLESHEET - NAIL DESIGN WEBSITE
+   Arquivo principal que importa todos os módulos CSS
+   =================================== */
+
+/* Importar variáveis e configurações globais */
+@import url('variables.css');
+
+/* Importar componentes */
+@import url('header.css');
+@import url('hero.css');
+@import url('buttons.css');
+@import url('sections.css');
+@import url('quiz.css');
+@import url('pricing-faq-footer.css');
+
+/* ===================================
+   ANIMAÇÕES E EFEITOS ESPECIAIS
+   =================================== */
+
+/* Animação de entrada para elementos */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Classe para elementos animados */
+.animate-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-left {
+    animation: fadeInLeft 0.6s ease-out;
+}
+
+.animate-right {
+    animation: fadeInRight 0.6s ease-out;
+}
+
+/* Estados iniciais para animação */
+.card,
+.module,
+.garantia-item,
+.acesso-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Animações de hover customizadas */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Loading state */
+body.loaded .card,
+body.loaded .module,
+body.loaded .garantia-item,
+body.loaded .acesso-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================
+   MELHORIAS DE ACESSIBILIDADE
+   =================================== */
+
+/* Foco visível para navegação por teclado */
+*:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Melhor contraste para texto */
+.high-contrast {
+    filter: contrast(1.2);
+}
+
+/* Reduzir movimento para usuários sensíveis */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ===================================
+   OTIMIZAÇÕES PARA PERFORMANCE
+   =================================== */
+
+/* Otimização para imagens */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Suavizar fontes */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Otimização para scrolling */
+.scroll-container {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ===================================
+   MEDIA QUERIES ADICIONAIS
+   =================================== */
+
+/* Telas muito pequenas */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-benefits {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .benefit-item {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Telas grandes */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1300px;
+    }
+    
+    .hero-text h1 {
+        font-size: 3.5rem;
+    }
+    
+    section {
+        padding: 6rem 0;
+    }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-dark: #f1f1f1;
+        --text-light: #ccc;
+        --bg-light: #2a2a2a;
+        --bg-white: #1a1a1a;
+        --shadow-light: 0 2px 10px rgba(0,0,0,0.3);
+        --shadow-medium: 0 4px 15px rgba(0,0,0,0.4);
+        --shadow-heavy: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    body {
+        background-color: var(--bg-white);
+        color: var(--text-dark);
+    }
+}
+
+/* ===================================
+   CLASSES UTILITÁRIAS ESPECÍFICAS
+   =================================== */
+
+/* Gradientes customizados */
+.gradient-primary {
+    background: var(--bg-gradient);
+}
+
+.gradient-secondary {
+    background: linear-gradient(45deg, var(--secondary-color), var(--secondary-light));
+}
+
+.gradient-accent {
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-light));
+}
+
+/* Sombras customizadas */
+.shadow-sm { box-shadow: var(--shadow-light); }
+.shadow-md { box-shadow: var(--shadow-medium); }
+.shadow-lg { box-shadow: var(--shadow-heavy); }
+
+/* Estados de carregamento */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .quiz-modal,
+    .btn-primary,
+    .btn-secondary,
+    .btn-comprar {
+        display: none !important;
+    }
+    
+    body {
+        color: #000;
+        background: #fff;
+    }
+    
+    section {
+        page-break-inside: avoid;
+    }
+}
