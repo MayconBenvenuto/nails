@@ -1,92 +1,39 @@
-// Quiz Data - 10 questões focadas em mulheres que querem aprender nail design
+// Quiz Data - 4 questões focadas em mulheres que querem aprender nail design
 const quizData = [
     {
-        question: "O que mais te motiva a querer aprender nail design?",
+        question: "Você gostaria de trabalhar de casa e ter sua própria renda?",
         options: [
-            "Quero ter minha própria renda e independência financeira",
-            "Sempre tive paixão por unhas e beleza",
-            "Busco uma profissão que me dê flexibilidade de horários",
-            "Quero empreender e ter meu próprio negócio"
+            "Sim, quero muito ter independência financeira",
+            "Sim, mas tenho receio de não conseguir",
+            "Talvez, dependendo da oportunidade",
+            "Não, prefiro trabalhar fora de casa"
         ]
     },
     {
-        question: "Qual é sua maior preocupação ao começar nessa área?",
+        question: "Você já trabalha na área da beleza?",
         options: [
-            "Não saber se tenho habilidade suficiente",
-            "Medo de não conseguir clientes no início",
-            "Preocupação com o investimento inicial",
-            "Receio de não aprender as técnicas corretamente"
+            "Não, seria minha primeira experiência",
+            "Sim, mas não com nail design",
+            "Sim, já faço unhas mas quero me aperfeiçoar",
+            "Trabalho em outra área completamente diferente"
         ]
     },
     {
-        question: "Quanto você gostaria de ganhar mensalmente como nail designer?",
+        question: "Seus familiares ou amigas já pediram para você fazer as unhas delas?",
         options: [
-            "R$ 1.500 - R$ 3.000 (complementar renda)",
-            "R$ 3.000 - R$ 6.000 (renda principal)",
-            "R$ 6.000 - R$ 10.000 (viver bem)",
-            "Mais de R$ 10.000 (liberdade total)"
+            "Sim, sempre me pedem e elogiam meu trabalho",
+            "Sim, algumas vezes já me pediram",
+            "Raramente, mas já aconteceu",
+            "Não, nunca me pediram"
         ]
     },
     {
-        question: "Qual é seu maior medo ao pensar em trabalhar com unhas?",
+        question: "Busca uma renda extra ou sua profissão principal?",
         options: [
-            "Não ter mãos firmes para fazer trabalhos delicados",
-            "Não conseguir criar designs bonitos e únicos",
-            "Demorar muito para aprender as técnicas",
-            "Não saber como precificar meu trabalho"
-        ]
-    },
-    {
-        question: "Como você imagina seu futuro como nail designer?",
-        options: [
-            "Atendendo em casa com agenda sempre cheia",
-            "Tendo meu próprio salão de beleza",
-            "Sendo reconhecida como a melhor da região",
-            "Ensinando outras mulheres a profissão"
-        ]
-    },
-    {
-        question: "Qual seria seu maior obstáculo para começar hoje?",
-        options: [
-            "Não sei por onde começar nem o que estudar",
-            "Falta de tempo para me dedicar aos estudos",
-            "Não tenho dinheiro para investir em cursos caros",
-            "Medo de não ter talento natural para isso"
-        ]
-    },
-    {
-        question: "O que você mais quer aprender primeiro?",
-        options: [
-            "Técnicas básicas de esmaltação perfeita",
-            "Como fazer nail art e decorações incríveis",
-            "Aplicação de gel, fibra e alongamento",
-            "Como montar meu negócio e conseguir clientes"
-        ]
-    },
-    {
-        question: "Qual é sua situação profissional atual?",
-        options: [
-            "Trabalho em outra área, mas quero mudar",
-            "Estou desempregada e preciso de uma profissão",
-            "Sou dona de casa e quero ter minha renda",
-            "Trabalho, mas quero uma renda extra"
-        ]
-    },
-    {
-        question: "Como você se sente quando vê o trabalho de outras nail designers?",
-        options: [
-            "Admirada e inspirada a aprender",
-            "Ansiosa para conseguir fazer igual",
-            "Insegura achando que nunca vou conseguir",
-            "Determinada a ser melhor que elas"
-        ]
-    },    {
-        question: "Se pudesse começar sua jornada como nail designer hoje, o que você mais precisaria?",
-        options: [
-            "Um método passo a passo fácil de seguir",
-            "Uma mentora experiente para me orientar",
-            "Técnicas que realmente funcionam no mercado",
-            "Confiança de que vou conseguir ter sucesso"
+            "Quero que seja minha profissão principal",
+            "Busco uma renda extra para complementar",
+            "Quero começar como extra e depois virar principal",
+            "Ainda estou decidindo entre as duas opções"
         ]
     }
 ];
@@ -187,11 +134,9 @@ function showResult() {
     
     // Hide quiz buttons
     document.getElementById('next-btn').style.display = 'none';
-    document.getElementById('finish-btn').style.display = 'none';
-    
-    // Update progress to 100%
+    document.getElementById('finish-btn').style.display = 'none';    // Update progress to 100%
     document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('current-question').textContent = '10';
+    document.getElementById('current-question').textContent = '4';
     
     // Auto scroll to price section after 3 seconds
     setTimeout(() => {
