@@ -10,9 +10,11 @@
 </head>
 <body>
     <!-- Quiz Modal -->
-    <div id="quiz-modal" class="quiz-modal">
-        <div class="quiz-container">
+    <div id="quiz-modal" class="quiz-modal">        <div class="quiz-container">
             <div class="quiz-header">
+                <button class="quiz-close-btn" id="quiz-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
                 <h2>🎯 Descubra seu Potencial como Nail Designer</h2>
                 <p>Responda este quiz rápido para descobrir como transformar sua paixão por unhas em uma carreira de sucesso!</p>
                 <div class="quiz-progress">
@@ -57,7 +59,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Você está a <span class="highlight">40 passos</span> de se tornar uma <span class="highlight">Nail Design de Sucesso</span></h1>
+                    <h1>Você está a <span class="highlight">5 passos</span> de se tornar uma <span class="highlight">Nail Design de Sucesso</span></h1>
                     <p class="hero-subtitle">Aprenda tudo sobre Nails Design e se torne uma Profissional de Sucesso.</p>
                     <p class="hero-description">Você pode produzir unhas super exclusivas e ser uma profissional diferenciada e inovadora!</p>
                     <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="btn-primary" target="_blank">QUERO COMEÇAR AGORA</a>
@@ -186,56 +188,104 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Depoimentos -->
+    </section>    <!-- Depoimentos -->
     <section class="depoimentos" id="depoimentos">
         <div class="container">
-            <h2>O QUE NOSSAS ALUNAS DIZEM</h2>
-            <div class="depoimentos-grid">
-                <div class="depoimento">
-                    <div class="estrelas">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <h2>🌟 TRANSFORMAÇÕES REAIS DE NOSSAS ALUNAS</h2>
+            <p class="depoimentos-subtitle">Veja os resultados incríveis que nossas alunas alcançaram!</p>
+            
+            <div class="depoimentos-visual-grid">
+                <div class="depoimento-visual">
+                    <div class="depoimento-image">
+                        <img src="dpm1.jpg" alt="Transformação aluna 1" loading="lazy">
+                        <div class="depoimento-overlay">
+                            <div class="result-badge">
+                                <i class="fas fa-star"></i>
+                                <span>RESULTADO REAL</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>"Curso incrível! Aprendi técnicas que me fizeram triplicar minha clientela em apenas 2 meses."</p>
-                    <div class="cliente">
-                        <strong>Maria Silva</strong>
-                        <span>Nail Designer</span>
+                    <div class="depoimento-content">
+                        <div class="estrelas">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="depoimento-text">"Saí do ZERO e hoje faturando R$ 8.000/mês! O curso mudou minha vida completamente."</p>
+                        <div class="cliente-info">
+                            <strong>Camila R.</strong>
+                            <span>Ex-vendedora, hoje Nail Designer de sucesso</span>
+                        </div>
                     </div>
                 </div>
-                <div class="depoimento">
-                    <div class="estrelas">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+
+                <div class="depoimento-visual destaque">
+                    <div class="depoimento-image">
+                        <img src="dpm2.jpg" alt="Transformação aluna 2" loading="lazy">
+                        <div class="depoimento-overlay">
+                            <div class="result-badge featured">
+                                <i class="fas fa-crown"></i>
+                                <span>MAIS POPULAR</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>"As aulas são muito didáticas e o suporte é excepcional. Recomendo para todas!"</p>
-                    <div class="cliente">
-                        <strong>Ana Costa</strong>
-                        <span>Empreendedora</span>
+                    <div class="depoimento-content">
+                        <div class="estrelas">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="depoimento-text">"Em 3 meses já tinha meu próprio estúdio! As técnicas são incríveis e funcionam de verdade."</p>
+                        <div class="cliente-info">
+                            <strong>Priscila M.</strong>
+                            <span>Dona de casa → Empresária de sucesso</span>
+                        </div>
+                        <div class="resultado-destaque">
+                            <span class="resultado-numero">R$ 15.000</span>
+                            <span class="resultado-texto">faturamento mensal</span>
+                        </div>
                     </div>
                 </div>
-                <div class="depoimento">
-                    <div class="estrelas">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+
+                <div class="depoimento-visual">
+                    <div class="depoimento-image">
+                        <img src="dpm3.jpg" alt="Transformação aluna 3" loading="lazy">
+                        <div class="depoimento-overlay">
+                            <div class="result-badge">
+                                <i class="fas fa-trophy"></i>
+                                <span>CONQUISTA</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>"Consegui montar meu próprio estúdio após fazer o curso. Mudou completamente minha vida!"</p>
-                    <div class="cliente">
-                        <strong>Juliana Santos</strong>
-                        <span>Proprietária de Estúdio</span>
+                    <div class="depoimento-content">
+                        <div class="estrelas">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="depoimento-text">"Consegui sair do emprego e hoje trabalho de casa com agenda lotada! Liberdade total."</p>
+                        <div class="cliente-info">
+                            <strong>Fernanda L.</strong>
+                            <span>Funcionária CLT → Empreendedora livre</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="depoimentos-cta">
+                <p class="cta-text">✨ <strong>Você também pode ter esses resultados!</strong></p>
+                <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="btn-depoimentos" target="_blank">
+                    🚀 QUERO MEU RESULTADO TAMBÉM!
+                </a>
+            </div>
+        </div>
+    </section>
         </div>
     </section>
 
@@ -265,11 +315,18 @@
                 <div class="preco-header">
                     <h3>ACESSO VITALÍCIO</h3>
                     <p>POR APENAS</p>
-                </div>
-                <div class="preco-valor">
-                    <span class="moeda">R$</span>
-                    <span class="valor">147</span>
-                    <span class="centavos">,00</span>
+                </div>                <div class="preco-valor">
+                    <div class="preco-parcelado">
+                        <span class="parcelas">10x de</span>
+                        <div class="valor-principal">
+                            <span class="moeda">R$</span>
+                            <span class="valor">17</span>
+                            <span class="centavos">,67</span>
+                        </div>
+                    </div>
+                    <div class="preco-total">
+                        <span class="total-text">ou R$ 147,00 à vista</span>
+                    </div>
                 </div>
                 <div class="beneficios">
                     <div class="beneficio">

@@ -112,36 +112,41 @@ function finishQuiz() {
 function showResult() {
     const questionContainer = document.getElementById('question-container');
     
-    // Resultado personalizado para mulheres que querem aprender
+    // Resultado melhorado com oferta especial
     const resultData = {
-        icon: "💎",
-        title: "VOCÊ NASCEU PARA ISSO!",
-        description: "Suas respostas revelam que você tem TODAS as características de uma futura Nail Designer de SUCESSO! Sua motivação, seus sonhos e sua determinação mostram que você está no caminho certo.",
-        highlight: "🌟 DESCOBRIR: Como sair do ZERO e construir uma carreira de SUCESSO em Nail Design!"
+        icon: "🎉",
+        title: "PARABÉNS!",
+        subtitle: "Você tem o PERFIL PERFEITO para ser Nail Designer!",
+        description: "Suas respostas confirmam que você possui todas as características necessárias para se tornar uma profissional de sucesso na área de nail design.",
+        offer: "⚡ OFERTA ESPECIAL: Vagas com 50% de desconto disponíveis até HOJE!",
+        cta: "Não perca esta oportunidade única de transformar sua vida profissional."
     };
     
     questionContainer.innerHTML = `
         <div class="quiz-result">
             <div class="result-icon">${resultData.icon}</div>
             <h3 class="result-title">${resultData.title}</h3>
+            <h4 class="result-subtitle">${resultData.subtitle}</h4>
             <p class="result-description">${resultData.description}</p>
-            <p style="color: #ff6b9d; font-weight: 600; font-size: 1.1rem; margin-bottom: 2rem;">${resultData.highlight}</p>
+            <div class="result-offer">
+                <p class="offer-text">${resultData.offer}</p>
+                <p class="cta-text">${resultData.cta}</p>
+            </div>
             <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="result-cta" target="_blank">
-                🚀 QUERO COMEÇAR MINHA TRANSFORMAÇÃO AGORA!
+                🚀 GARANTIR MINHA VAGA COM DESCONTO!
             </a>
         </div>
     `;
     
     // Hide quiz buttons
     document.getElementById('next-btn').style.display = 'none';
-    document.getElementById('finish-btn').style.display = 'none';    // Update progress to 100%
+    document.getElementById('finish-btn').style.display = 'none';
+    
+    // Update progress to 100%
     document.getElementById('progress-fill').style.width = '100%';
     document.getElementById('current-question').textContent = '4';
     
-    // Auto scroll to price section after 3 seconds
-    setTimeout(() => {
-        closeQuizAndScroll();
-    }, 3000);
+    // Não remover automaticamente - só com clique no X
 }
 
 function closeQuizAndScroll() {
@@ -162,6 +167,16 @@ function closeQuizAndScroll() {
     }, 500);
 }
 
+function closeQuiz() {
+    const quizModal = document.getElementById('quiz-modal');
+    quizModal.style.opacity = '0';
+    quizModal.style.transform = 'scale(0.9)';
+    
+    setTimeout(() => {
+        quizModal.style.display = 'none';
+    }, 500);
+}
+
 // Event listeners for quiz
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize quiz
@@ -170,11 +185,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners
     document.getElementById('next-btn').addEventListener('click', nextQuestion);
     document.getElementById('finish-btn').addEventListener('click', finishQuiz);
+    document.getElementById('quiz-close-btn').addEventListener('click', closeQuiz);
     
-    // Prevent closing quiz (remove any close buttons/escape key)
+    // Remove auto-close functionality - only close manually
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            e.preventDefault();
+            closeQuiz();
         }
     });
 });
@@ -218,10 +234,10 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('scroll', function() {
     const header = document.querySelector('.header');
     if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 107, 157, 0.95)';
+        header.style.background = 'rgba(101, 15, 89, 0.95)';
         header.style.backdropFilter = 'blur(10px)';
     } else {
-        header.style.background = 'linear-gradient(135deg, #ff6b9d, #ff8fab)';
+        header.style.background = 'linear-gradient(135deg, #650F59, #8B1C6B)';
         header.style.backdropFilter = 'none';
     }
 });
@@ -259,7 +275,7 @@ function animateCounter() {
     if (!priceElement) return;
     
     let start = 0;
-    const end = 147;
+    const end = 17;
     const duration = 2000;
     const increment = end / (duration / 16);
     
@@ -394,6 +410,76 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Instagram button floating effect
+function createFloatingInstagram() {
+    const floatingBtn = document.createElement('a');
+    floatingBtn.href = 'https://www.instagram.com/escolanailelite/';
+    floatingBtn.target = '_blank';
+    floatingBtn.className = 'floating-instagram';
+    floatingBtn.innerHTML = '<i class="fab fa-instagram"></i>';
+    
+    // Add floating Instagram CSS
+    const floatingStyle = document.createElement('style');
+    floatingStyle.textContent = `
+        .floating-instagram {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: instagramPulse 2s infinite;
+        }
+        
+        .floating-instagram:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(225, 48, 108, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+        
+        @keyframes instagramPulse {
+            0% { 
+                box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 6px 25px rgba(225, 48, 108, 0.6);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .floating-instagram {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    `;
+    document.head.appendChild(floatingStyle);
+    document.body.appendChild(floatingBtn);
+}
+
+// Initialize floating Instagram button
+document.addEventListener('DOMContentLoaded', createFloatingInstagram);
 
 // Add loading animation
 window.addEventListener('load', function() {
