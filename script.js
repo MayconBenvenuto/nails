@@ -338,8 +338,7 @@ function showResult() {
         offer: "⚡ OFERTA ESPECIAL: Vagas com 50% de desconto disponíveis até HOJE!",
         cta: "Não perca esta oportunidade única de transformar sua vida profissional."
     };
-    
-    questionContainer.innerHTML = `
+      questionContainer.innerHTML = `
         <div class="quiz-result">
             <div class="result-icon">${resultData.icon}</div>
             <h3 class="result-title">${resultData.title}</h3>
@@ -349,13 +348,12 @@ function showResult() {
                 <p class="offer-text">${resultData.offer}</p>
                 <p class="cta-text">${resultData.cta}</p>
             </div>
-            <a href="https://go.hotmart.com/K100327110W?ap=a12c" class="result-cta" target="_blank">
+            <button class="result-cta" onclick="window.open('https://go.hotmart.com/K100327110W?ap=a12c', '_blank'); setTimeout(() => { closeQuiz(); }, 500);">
                 🚀 GARANTIR MINHA VAGA COM DESCONTO!
-            </a>
+            </button>
         </div>
     `;
-    
-    // Hide quiz buttons
+      // Hide quiz buttons
     document.getElementById('next-btn').style.display = 'none';
     document.getElementById('finish-btn').style.display = 'none';    
     // Update progress to 100%
@@ -711,10 +709,22 @@ document.addEventListener('DOMContentLoaded', function() {
     createFloatingInstagram();
     handleImageErrors();
     
-    // Quiz event listeners
-    document.getElementById('next-btn').addEventListener('click', nextQuestion);
-    document.getElementById('finish-btn').addEventListener('click', finishQuiz);
-    document.getElementById('quiz-close-btn').addEventListener('click', closeQuiz);
+    // Quiz event listeners - Adicionar verificação se os elementos existem
+    const nextBtn = document.getElementById('next-btn');
+    const finishBtn = document.getElementById('finish-btn');
+    const quizCloseBtn = document.getElementById('quiz-close-btn');
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextQuestion);
+    }
+    
+    if (finishBtn) {
+        finishBtn.addEventListener('click', finishQuiz);
+    }
+    
+    if (quizCloseBtn) {
+        quizCloseBtn.addEventListener('click', closeQuiz);
+    }
     
     // Escape key to close quiz
     document.addEventListener('keydown', function(e) {
@@ -730,6 +740,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         document.body.classList.add('loaded');
     }, 100);
+    
+    // Verificar se todas as funções necessárias existem
+    console.log('Site iniciado com sucesso!');
 });
 
 // Scroll Animations
@@ -924,31 +937,59 @@ function fixHeroImage() {
     
     // Lista de URLs de fallback para uma imagem de nail design
     const fallbackImages = [
-        "hero-image.jpg",
-        "https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=1000",
-        "https://images.pexels.com/photos/7791102/pexels-photo-7791102.jpeg?auto=compress&cs=tinysrgb&w=1000",
-        "https://images.pexels.com/photos/704815/pexels-photo-704815.jpeg?auto=compress&cs=tinysrgb&w=1000"
+        "https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/7791102/pexels-photo-7791102.jpeg?auto=compress&cs=tinysrgb&w=800", 
+        "https://images.pexels.com/photos/704815/pexels-photo-704815.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/3997982/pexels-photo-3997982.jpeg?auto=compress&cs=tinysrgb&w=800"
     ];
     
     let fallbackIndex = 0;
+    let isLocalImageTested = false;
+    
+    // Função para testar se a imagem local existe
+    function testLocalImage() {
+        if (isLocalImageTested) return;
+        isLocalImageTested = true;
+        
+        const testImg = new Image();
+        testImg.onload = function() {
+            // A imagem local existe e carregou com sucesso
+            if (heroImg.src !== testImg.src) {
+                heroImg.src = testImg.src;
+            }
+        };
+        testImg.onerror = function() {
+            // A imagem local não existe, usar fallback online
+            loadNextFallback();
+        };
+        testImg.src = 'hero-image.jpg';
+    }
     
     // Verificar se a imagem já carregou
     if (heroImg.complete) {
         // Se a imagem já carregou mas teve erro, usar fallback
         if (heroImg.naturalHeight === 0) {
-            loadNextFallback();
+            testLocalImage();
         }
+    } else {
+        // Se a imagem ainda não carregou, testar a local
+        testLocalImage();
     }
     
     // Adicionar handler de erro para a imagem
-    heroImg.addEventListener('error', loadNextFallback);
+    heroImg.addEventListener('error', function() {
+        if (!isLocalImageTested) {
+            testLocalImage();
+        } else {
+            loadNextFallback();
+        }
+    });
     
     // Tenta carregar o próximo fallback
     function loadNextFallback() {
-        fallbackIndex++;
-        
         if (fallbackIndex < fallbackImages.length) {
             heroImg.src = fallbackImages[fallbackIndex];
+            fallbackIndex++;
         } else {
             // Todos os fallbacks falharam, criar uma imagem fallback inline
             const heroImageDiv = document.querySelector('.hero-image');
